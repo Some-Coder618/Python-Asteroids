@@ -5,6 +5,7 @@ from asteroid import *
 from asteroidfield import *
 from shot import Shot
 import sys
+import time
 
 def main():
     print("Starting Asteroids!")
@@ -26,6 +27,7 @@ def main():
     clock = pygame.time.Clock()
     dt = 0
     score = 0
+    lives = 3
 
     while True:
         for event in pygame.event.get():
@@ -38,9 +40,13 @@ def main():
 
         for asteroid in asteroids:
             if asteroid.collision_check(player):
-                print("Game over!")
-                print(f"Your score was: {score}")
-                sys.exit()
+                if lives <= 0:
+                    print("Game over!")
+                    print(f"Your score was: {score}")
+                    sys.exit()
+                else:
+                    lives -= 1
+                    player.position = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
         for asteroid in asteroids:
             for shot in shots:
