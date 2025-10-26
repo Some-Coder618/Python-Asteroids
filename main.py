@@ -57,6 +57,7 @@ def main():
 
         for thing in drawable:
             thing.draw(screen)
+
         pygame.display.flip()
 
         
